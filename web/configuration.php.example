@@ -1,0 +1,13 @@
+<?php
+
+class Configuration {
+    static function getConfiguration() {
+        $config['ROOMER_API_KEY']       = '<ROOMER_API_KEY>';
+        $config['ROOMER_API_URL']       = '<ROOMER_API_URL>';
+        $config['SCHOOLS_ENDPOINT']     = 'all';
+        $config['BUILDINGS_ENDPOINT']   = 'campus/';
+        $config['MAINTENANCE_MODE']     = false;
+
+        return $config;
+    }
+}
