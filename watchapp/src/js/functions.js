@@ -38,7 +38,7 @@ functions.getSetting = function (setting, default_setting) {
     if (!default_setting) {
         default_setting = false;
     }
-    return Settings.data(setting) !== null ? Settings.data(setting) : default_setting;
+    return Settings.option(setting) !== null ? Settings.option(setting) : default_setting;
 };
 
 
