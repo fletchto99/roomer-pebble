@@ -8,10 +8,10 @@ var functions = module.exports;
 
 //Functions
 functions.init = function () {
-    //if (!functions.getSetting('university')) {
-    //    functions.showErrorCard('Please set a university in the settings!');
-    //    return;
-    //}
+    if (!functions.getSetting('university')) {
+        functions.showErrorCard('Please set a university in the settings!');
+        return;
+    }
     var menuItems = [{
         title: 'Buildings',
         icon: 'IMAGE_BUILDING_ICON'
@@ -27,7 +27,7 @@ functions.init = function () {
     mainMenu.show();
     mainMenu.on('select', function (event) {
         if (event.itemIndex === 0) {
-            buildings.fetch(1);
+            buildings.fetch(functions.getSetting('university'));
         } else if (event.itemIndex === 1) {
             about.fetch();
         }

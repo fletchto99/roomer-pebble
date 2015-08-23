@@ -7,7 +7,7 @@ function getQueryParam(variable, defaultValue) {
             return decodeURIComponent(pair[1]);
         }
     }
-    return defaultValue || '';
+    return defaultValue || null;
 }
 
 $(function () {
@@ -28,11 +28,15 @@ $(function () {
         },
         success: function(data) {
             savebutton.disabled = false;
+            university.disabled = false;
             university.innerHTML = '';
             data.forEach(function(school){
                 var elem = document.createElement('option');
                 elem.className = 'item-select-option';
                 elem.value = school.id;
+                if (school.id == getQueryParam('university')) {
+                    elem.selected = true;
+                }
                 elem.textContent = school.proper_name;
                 university.appendChild(elem);
             });

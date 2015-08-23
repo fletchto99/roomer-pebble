@@ -26,7 +26,7 @@ function getRooms(schoolID, building_code) {
             for (var i = 0; i < data.length; i++) {
                 menuItems[i] = {
                     title: data[i].name,
-                    subtitle: 'Available for: ' + data[i].time_left
+                    subtitle: data[i].time_left
                 };
             }
             var menu = new UI.Menu({
