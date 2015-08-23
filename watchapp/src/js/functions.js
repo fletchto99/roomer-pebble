@@ -88,7 +88,7 @@ functions.getColorOptions = function(type) {
         case 'LOADING':
             return {titleColor: 'blue', subtitleColor: 'black', bodyColor: 'black'};
         case 'DATA':
-            return {titleColor: 'orange', subtitleColor: 'black', bodyColor: 'black'};
+            return {titleColor: 'black', subtitleColor: 'black', bodyColor: 'black'};
         default:
             return {titleColor: 'black', subtitleColor: 'black', bodyColor: 'black'};
     }
