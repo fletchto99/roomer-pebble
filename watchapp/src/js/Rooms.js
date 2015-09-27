@@ -30,10 +30,11 @@ function getRooms(schoolID, building_code) {
                 };
             }
             var menu = new UI.Menu({
-               sections: [{
-                   title: 'Rooms - ' + data.length, items: menuItems
-               }]
-           });
+                sections: [{
+                    title: 'Rooms - ' + data.length, items: menuItems
+                }],
+                highlightBackgroundColor: '#00AA55'
+            });
 
             menu.on('select', function (event) {
             });

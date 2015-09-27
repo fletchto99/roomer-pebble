@@ -22,7 +22,8 @@ functions.init = function () {
     var mainMenu = new UI.Menu({
         sections: [{
             title: 'Roomer', items: menuItems
-        }]
+        }],
+        highlightBackgroundColor: '#00AA55'
     });
     mainMenu.show();
     mainMenu.on('select', function (event) {

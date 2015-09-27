@@ -30,7 +30,8 @@ function getBuildings(schoolID) {
                 var menu = new UI.Menu({
                     sections: [{
                         title: 'Buildings - ' + data.length, items: menuItems
-                    }]
+                    }],
+                    highlightBackgroundColor: '#00AA55'
                 });
 
                 menu.on('select', function (event) {

@@ -70,7 +70,74 @@ var SizeType = function(x) {
   this.sizeH(x.y);
 };
 
-var colorMap = {
+var hexColorMap = {
+    '#000000': 0xC0,
+    '#000055': 0xC1,
+    '#0000AA': 0xC2,
+    '#0000FF': 0xC3,
+    '#005500': 0xC4,
+    '#005555': 0xC5,
+    '#0055AA': 0xC6,
+    '#0055FF': 0xC7,
+    '#00AA00': 0xC8,
+    '#00AA55': 0xC9,
+    '#00AAAA': 0xCA,
+    '#00AAFF': 0xCB,
+    '#00FF00': 0xCC,
+    '#00FF55': 0xCD,
+    '#00FFAA': 0xCE,
+    '#00FFFF': 0xCF,
+    '#550000': 0xD0,
+    '#550055': 0xD1,
+    '#5500AA': 0xD2,
+    '#5500FF': 0xD3,
+    '#555500': 0xD4,
+    '#555555': 0xD5,
+    '#5555AA': 0xD6,
+    '#5555FF': 0xD7,
+    '#55AA00': 0xD8,
+    '#55AA55': 0xD9,
+    '#55AAAA': 0xDA,
+    '#55AAFF': 0xDB,
+    '#55FF00': 0xDC,
+    '#55FF55': 0xDD,
+    '#55FFAA': 0xDE,
+    '#55FFFF': 0xDF,
+    '#AA0000': 0xE0,
+    '#AA0055': 0xE1,
+    '#AA00AA': 0xE2,
+    '#AA00FF': 0xE3,
+    '#AA5500': 0xE4,
+    '#AA5555': 0xE5,
+    '#AA55AA': 0xE6,
+    '#AA55FF': 0xE7,
+    '#AAAA00': 0xE8,
+    '#AAAA55': 0xE9,
+    '#AAAAAA': 0xEA,
+    '#AAAAFF': 0xEB,
+    '#AAFF00': 0xEC,
+    '#AAFF55': 0xED,
+    '#AAFFAA': 0xEE,
+    '#AAFFFF': 0xEF,
+    '#FF0000': 0xF0,
+    '#FF0055': 0xF1,
+    '#FF00AA': 0xF2,
+    '#FF00FF': 0xF3,
+    '#FF5500': 0xF4,
+    '#FF5555': 0xF5,
+    '#FF55AA': 0xF6,
+    '#FF55FF': 0xF7,
+    '#FFAA00': 0xF8,
+    '#FFAA55': 0xF9,
+    '#FFAAAA': 0xFA,
+    '#FFAAFF': 0xFB,
+    '#FFFF00': 0xFC,
+    '#FFFF55': 0xFD,
+    '#FFFFAA': 0xFE,
+    '#FFFFFF': 0xFF,
+};
+
+var namedColorMap = {
     'clear': 0x00,
     'black': 0xC0,
     'oxfordBlue': 0xC1,
@@ -140,7 +207,43 @@ var colorMap = {
 };
 
 var Color = function(color) {
-  return colorMap[color] ? colorMap[color] : colorMap.clear;
+  if (color.charAt(0)=='#') {
+      //Convert full hex to shorthand
+      if (color.length==4){
+          var r = color.charAt(1);
+          var g = color.charAt(2);
+          var b = color.charAt(3);
+          color = '#'+r+r+g+g+b+b;
+      }
+      //Ensure upper case
+      color = color.toUpperCase();
+      return hexColorMap[roundColor(color)];
+  }
+  return namedColorMap[color] ? namedColorMap[color] : namedColorMap.clear;
+};
+
+var roundColor = function (color) {
+    var closestTo = function(color, colors) {
+        var dist = Infinity;
+        var result = color;
+        colors.forEach(function(col) {
+            var localdist = Math.abs(parseInt(color, 16)-parseInt(col, 16));
+            if (localdist < dist) {
+                dist = localdist;
+                result = col;
+            }
+        });
+        return result;
+    };
+
+    var colors = ['00','55','AA','FF'];
+    var r_hex = color.charAt(1) + color.charAt(2);
+    var g_hex = color.charAt(3) + color.charAt(4);
+    var b_hex = color.charAt(5) + color.charAt(6);
+    var r = closestTo(r_hex, colors);
+    var g = closestTo(g_hex, colors);
+    var b = closestTo(b_hex, colors);
+    return '#'+r+g+b;
 };
 
 var Font = function(x) {
@@ -430,6 +533,7 @@ var ImagePacket = new struct([
   ['uint32', 'id'],
   ['int16', 'width'],
   ['int16', 'height'],
+  ['uint16', 'pixelsLength'],
   ['data', 'pixels'],
 ]);
 
@@ -769,11 +873,19 @@ MessageQueue.prototype.stop = function() {
 };
 
 MessageQueue.prototype.consume = function() {
-  this._queue.splice(0, 1);
+  this._queue.shift();
   if (this._queue.length === 0) {
     return this.stop();
   }
   this.cycle();
+};
+
+MessageQueue.prototype.checkSent = function(message, fn) {
+  return function() {
+    if (message === this._sent) {
+      fn();
+    }
+  }.bind(this);
 };
 
 MessageQueue.prototype.cycle = function() {
@@ -784,7 +896,10 @@ MessageQueue.prototype.cycle = function() {
   if (!head) {
     return this.stop();
   }
-  Pebble.sendAppMessage(head, this._consume, this._cycle);
+  this._sent = head;
+  var success = this.checkSent(head, this._consume);
+  var failure = this.checkSent(head, this._cycle);
+  Pebble.sendAppMessage(head, success, failure);
 };
 
 MessageQueue.prototype.send = function(message) {
