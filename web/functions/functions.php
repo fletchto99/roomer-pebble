@@ -52,15 +52,15 @@ class Functions {
         return $result;
     }
 
-    public static function timeToHumanReadable($mills) {
-        $x = $mills / 1000;
+    public static function timeToHumanReadable($seconds) {
+        $x = $seconds - time();
         $x /= 60;
         $minutes = $x % 60;
         $x /= 60;
         $hours = $x % 24;
         $x /= 24;
         $days = floor($x);
-        return $days.($days==1 ? ' day ' : ' days ') . $hours . ($hours == 1 ? ' hour ' : ' hours ') . $minutes . ($minutes == 1 ? ' minutes ' : ' minutes ');
+        return ($days > 0 ? $days.($days==1 ? ' day ' : ' days ') : '') . $hours . ($hours == 1 ? ' hour ' : ' hours ') . $minutes . ($minutes == 1 ? ' minutes ' : ' minutes ');
     }
 
 }
