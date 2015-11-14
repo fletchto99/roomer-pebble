@@ -9,7 +9,7 @@
  */
 
 // Compatibility definitions for aplite on 2.9
-#if !defined(PBL_PLATFORM_APLITE) && !defined(PBL_PLATFORM_BASALT)
+#if !defined(PBL_PLATFORM_APLITE) && !defined(PBL_PLATFORM_BASALT) && !defined(PBL_PLATFORM_CHALK)
 
 #define PBL_SDK_2
 
@@ -136,11 +136,16 @@ typedef union GColor8 {
   ((prop_anim)->values.to.grect = *(value_ptr))
 #endif
 
+// Voice API
+typedef struct DictationSession DictationSession;
+typedef struct DictationSessionStatus DictationSessionStatus;
+void dictation_session_start(DictationSession *session);
+
 #endif
 
 // Legacy definitions for basalt on 3.0
 // These should eventually be removed in the future
-#ifdef PBL_PLATFORM_BASALT
+#ifdef PBL_SDK_3
 
 #define window_set_fullscreen(window, fullscreen)
 
