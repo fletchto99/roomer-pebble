@@ -72,8 +72,8 @@ $(function () {
             savebutton.value = 'Saving...';
             savebutton.disabled = true;
             document.location =  getQueryParam('return_to', 'pebblejs://close#') + encodeURIComponent(JSON.stringify({
-                    'university': university.value
-                }));
+                'university': university.value
+            }));
         }
     });
 

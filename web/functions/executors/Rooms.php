@@ -19,10 +19,10 @@ class Rooms {
         $rooms = [];
         $response = functions::makeAPICall($this->url . $this -> schoolID .'?access_token=' . $this->key);
         if (empty($response)) {
-            return ['Error' => 'No school with the id: ' . $this->schoolID];
+            return ['error' => 'No school with the id: ' . $this->schoolID];
         }
         if (!array_key_exists($this->building, $response)) {
-            return ['Error' => 'No building with the code: ' . $this->building];
+            return ['error' => 'No building with the code: ' . $this->building];
         }
         $temprooms = $response[$this->building];
         foreach ($temprooms as $room) {

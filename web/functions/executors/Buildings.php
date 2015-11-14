@@ -14,7 +14,10 @@ class Buildings {
         }
         $response = functions::makeAPICall($this->url . $this -> schoolID .'?access_token=' . $this->key);
         if (empty($response)) {
-            return ['Error' => 'No school with the id: ' . $this->schoolID];
+            return ['error' => 'No school with the id: ' . $this->schoolID];
+        }
+        if (isset($response['code']) && intval($response['code']) === 300) {
+            return ['error' => 'The campus is closed!'];
         }
         $buildings = array_keys($response);
         usort($buildings, function ($building1, $building2) {
