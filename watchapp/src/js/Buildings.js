@@ -39,7 +39,9 @@ function getBuildings(schoolID) {
                 });
                 menu.show();
             }
-        }, function (error) {
+        }, function (error, status, request) {
+            console.log(error);
+            console.log(status);
             functions.showErrorCard('Error contacting server.', loadingCard);
             console.log('Error loading buildings ' + error)
         });
