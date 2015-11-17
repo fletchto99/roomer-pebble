@@ -9,8 +9,7 @@ var functions = module.exports;
 //Functions
 functions.init = function () {
     if (!functions.getSetting('university')) {
-        functions.showErrorCard('Please set a university in the settings!');
-        return;
+        return functions.showErrorCard('Please set a university in the settings!');
     }
     var menuItems = [{
         title: 'Buildings',
@@ -33,6 +32,7 @@ functions.init = function () {
             about.fetch();
         }
     });
+    return true;
 };
 
 functions.getSetting = function (setting, default_setting) {
