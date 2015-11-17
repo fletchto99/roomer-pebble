@@ -32,7 +32,7 @@ functions.init = function () {
             about.fetch();
         }
     });
-    return true;
+    return null;
 };
 
 functions.getSetting = function (setting, default_setting) {
