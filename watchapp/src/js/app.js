@@ -14,8 +14,9 @@ Settings.config(
             functions.showErrorCard('Error saving settings!');
         }
         if (card != null) {
-            card = functions.init();
+            var temp = functions.init();
             card.hide();
+            card = temp;
         }
     }
 );
