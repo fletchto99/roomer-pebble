@@ -1,66 +1,65 @@
 {
-    "appKeys": {},
-    "capabilities": [
-                     "location",
-                     "configurable"
-                     ],
-    "companyName": "fletch_to_99",
-    "shortName": "Roomer",
-    "longName": "Roomer",
-    "projectType": "native",
-    "resources": {
-        "media": [
-                  {
-                  "menuIcon": true,
-                  "type": "png",
-                  "name": "IMAGE_MENU_ICON",
-                  "file": "images/menu_icon.png"
-                  },
-                  {
-                  "type": "png",
-                  "name": "IMAGE_LOGO_SPLASH",
-                  "file": "images/logo_splash.png"
-                  },
-                  {
-                  "type": "png",
-                  "name": "IMAGE_TILE_SPLASH",
-                  "file": "images/tile_splash.png"
-                  },
-                  {
-                  "type": "png",
-                  "name": "IMAGE_INFO_ICON",
-                  "file": "images/info.png"
-                  },
-                  {
-                    "type": "png",
-                    "name": "IMAGE_LOADING_ICON",
-                    "file": "images/loading.png"
-                  },
-                  {
-                    "type": "png",
-                    "name": "IMAGE_BUILDING_ICON",
-                    "file": "images/building.png"
-                  },
-                  {
-                  "type": "png",
-                  "name": "IMAGE_ERROR_ICON",
-                  "file": "images/error.png"
-                  },
-                  {
-                  "type": "font",
-                  "name": "MONO_FONT_14",
-                  "file": "fonts/UbuntuMono-Regular.ttf"
-                  }
-                  ]
-    },
-    "sdkVersion": "3",
-    "targetPlatforms": [
-                        "aplite",
-                        "basalt"
-                        ],
-    "uuid": "94972f57-8c1c-4901-895b-4383d7f32641",
-    "versionLabel": "1.04",
-    "watchapp": {
-        "watchface": false
-    }
+  "appKeys": {},
+  "capabilities": [
+    "location",
+    "configurable"
+  ],
+  "companyName": "fletch_to_99",
+  "longName": "Roomer",
+  "resources": {
+    "media": [
+      {
+        "file": "images/menu_icon.png",
+        "menuIcon": true,
+        "name": "IMAGE_MENU_ICON",
+        "type": "bitmap"
+      },
+      {
+        "file": "images/logo_splash.png",
+        "name": "IMAGE_LOGO_SPLASH",
+        "type": "bitmap"
+      },
+      {
+        "file": "images/tile_splash.png",
+        "name": "IMAGE_TILE_SPLASH",
+        "type": "bitmap"
+      },
+      {
+        "file": "images/info.png",
+        "name": "IMAGE_INFO_ICON",
+        "type": "bitmap"
+      },
+      {
+        "file": "images/loading.png",
+        "name": "IMAGE_LOADING_ICON",
+        "type": "bitmap"
+      },
+      {
+        "file": "images/building.png",
+        "name": "IMAGE_BUILDING_ICON",
+        "type": "bitmap"
+      },
+      {
+        "file": "images/error.png",
+        "name": "IMAGE_ERROR_ICON",
+        "type": "bitmap"
+      },
+      {
+        "file": "fonts/UbuntuMono-Regular.ttf",
+        "name": "MONO_FONT_14",
+        "type": "font"
+      }
+    ]
+  },
+  "sdkVersion": "3",
+  "shortName": "Roomer",
+  "targetPlatforms": [
+    "aplite",
+    "basalt"
+  ],
+  "uuid": "94972f57-8c1c-4901-895b-4383d7f32641",
+  "versionLabel": "1.05",
+  "watchapp": {
+    "watchface": false
+  }
 }
